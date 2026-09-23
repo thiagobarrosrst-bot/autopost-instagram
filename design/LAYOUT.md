@@ -18,11 +18,16 @@
    case, quando existir, é sempre algo que o próprio Thiago construiu/testou.
 4. **Estrutura fixa de 8 slides** (ver abaixo) — não improvisar outro número
    de slides sem o usuário pedir.
-5. **Foto real do Thiago sempre em full-bleed no slide 1** — nunca cortar a
-   foto ao meio pra "resolver" sobreposição de texto. Se o texto colidir com
-   o rosto, o ajuste é no *gradiente/posição do texto*, nunca na composição
-   da foto virar duas metades (já tentamos, ficou ruim — feedback do
-   usuário em 2026-09-23).
+5. **Slide 1 (capa) SEM foto — fundo creme, igual ao padrão real dos posts
+   de @thiagorst.ia** (referência enviada pelo usuário em 2026-09-23: grid
+   de 9 capas reais, 150-358 compartilhamentos cada). Passou por 3 versões
+   antes desta: full-bleed com texto sobre o rosto (rejeitado), foto em
+   cima/texto embaixo em faixa sólida (rejeitado, "ficou ruim"), fundo
+   escuro sólido com card de prova (rejeitado — não batia com a
+   referência). **Esta é a versão final**: tag texto simples (sem pílula)
+   + headline Bebas Neue (última linha laranja) + divisor + subtítulo,
+   sobre o mesmo fundo creme decorado dos outros slides — sem foto, sem
+   card. Não reintroduzir foto/card no slide 1 sem o usuário pedir de novo.
 
 ## Pesquisa que embasa o sistema
 
@@ -69,7 +74,7 @@ MUT                 = #6B6355   // texto secundário
 
 | # | Tipo (`kind`) | Fundo | Conteúdo |
 |---|---|---|---|
-| 1 | `capa` | Foto full-bleed | Gancho principal — afirmação/contradição curta (5-7 palavras), card de prova (números OU checklist, conforme o assunto) sobre peito/jaqueta da foto, nunca sobre o rosto |
+| 1 | `capa` | Creme | Gancho principal — afirmação/contradição curta (5-7 palavras), sem foto nem card, igual ao padrão real da conta |
 | 2 | `capa2` | Escuro | Segunda capa / outro gancho — reforço de autoridade com números/stats do próprio case (não de empresa terceira) |
 | 3 | `dor` | Creme | O problema — 3 bullets de dor reconhecível |
 | 4-6 | `prompt` | Alternando | Os prompts/passos práticos, um por slide, sempre copiáveis (texto literal entre aspas) |
@@ -78,15 +83,14 @@ MUT                 = #6B6355   // texto secundário
 
 ### Slide 1 — regras específicas (o mais importante pra parar o scroll)
 
-- Foto ocupa o slide inteiro (`object-fit: cover`, sem cortar em faixas).
-- Gradiente escuro **progressivo**, começando só depois da zona do rosto
-  (~210px do topo num canvas de 525px) — nunca opaco sobre a cara.
-- Card de prova (`_proof_card_stats` pra números tipo painel/métrica,
-  `_proof_card_checklist` pra lista de tarefas) fica ancorado logo abaixo
-  da zona do rosto, nunca mais embaixo que isso brigando com o texto.
-- Bloco de texto (tag + headline 2 linhas + linha divisória + subtítulo)
-  ancorado no rodapé (`bottom`), nunca em posição fixa a partir do topo —
-  isso evita que ele estoure pra cima do card quando o conteúdo variar.
+- Mesmo `_wrap_creme` dos slides de conteúdo (fundo creme, decoração
+  técnica sutil, slash mark, triângulo de canto, rodapé com @handle).
+- Tag em texto simples (`_tag()`, sem fundo/pílula) — igual à referência
+  real, nunca `_tag_pill` nesse slide.
+- Headline (`_h1`) com tamanho ajustado por `fit_size()` pra sempre ocupar
+  bem a largura do slide, última linha em laranja.
+- Sem foto, sem card de prova — a prova concreta (prompt copiável,
+  números) vive nos slides de conteúdo (3-7), não na capa.
 
 ## Legenda (fora do slide, mas parte do sistema)
 

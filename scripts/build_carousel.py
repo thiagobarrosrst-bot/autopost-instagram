@@ -216,41 +216,22 @@ def _proof_card_stats(app_label: str, rows) -> str:
     </div>"""
 
 
-FACE_CLEAR_Y = 210  # px a partir do topo que consideramos "zona do rosto" — nada entra aqui
+def _slide1_fullbleed(headline_lines, subtitle, tag_text, photo_path: Path = None, proof=None, use_photo=False) -> str:
+    """Slide 1 (capa): idêntico ao padrão real dos posts de @thiagorst.ia — fundo creme,
+    tag em texto simples (sem pílula), headline Bebas Neue com última linha em laranja,
+    divisor, subtítulo. Sem foto, sem card — exatamente como a referência que o usuário
+    mandou dos próprios posts que já engajam (150-358 compartilhamentos)."""
+    inner = _tag(tag_text) + _h1(headline_lines, size=fit_size(headline_lines)) + _div() + _body(subtitle)
+    return _wrap_creme(inner)
 
 
-def _slide1_fullbleed(headline_lines, subtitle, tag_text, photo_path: Path, proof=None, use_photo=True) -> str:
-    """Slide 1: foto real full-bleed (imersiva, como nos posts virais analisados), com
-    gradiente escuro progressivo na base segurando texto+card — nunca sobre o rosto
-    (que fica nos primeiros ~210px), sempre sobre peito/jaqueta pra baixo.
-    use_photo=False: fundo escuro sólido no lugar da foto (mesmo layout de texto/card)."""
-    photo_uri = _img_data_uri(photo_path) if (use_photo and photo_path.exists()) else None
-    photo_html = (
-        f'<img src="{photo_uri}" style="position:absolute;inset:0;width:100%;height:100%;'
-        f'object-fit:cover;object-position:center 15%;z-index:0;">'
-        if photo_uri else f'<div style="position:absolute;inset:0;background:{DBG};z-index:0;"></div>'
-    )
-    proof_html = ""
-    if proof:
-        if proof.get("type") == "stats":
-            card = _proof_card_stats(proof["label"], proof["items"])
-        else:
-            card = _proof_card_checklist(proof["label"], proof["items"])
-        proof_html = f'<div style="position:absolute;top:{FACE_CLEAR_Y}px;left:0;right:0;z-index:2;">{card}</div>'
-
-    return f"""<div class="slide" style="width:{W}px;height:{H}px;position:relative;overflow:hidden;background:{DBG};box-sizing:border-box;">
-      {photo_html}
-      <div style="position:absolute;left:0;right:0;top:{FACE_CLEAR_Y}px;bottom:0;
-        background:linear-gradient(180deg,rgba(18,16,13,0) 0%,rgba(18,16,13,0.55) 30%,rgba(18,16,13,0.97) 65%);z-index:1;"></div>
-      {_slash_mark_light()}
-      {proof_html}
-      <div style="position:absolute;left:26px;right:26px;bottom:20px;z-index:5;">
-        {_tag_pill(tag_text)}
-        {_h1(headline_lines[:2], size=32, light=True)}
-        {_div()}
-        {_body(subtitle, light=True)}
-      </div>
-    </div>"""
+def fit_size(lines, area_px=364, max_size=48, min_size=30, char_ratio=0.5):
+    """Maior tamanho de fonte em que a linha mais longa do headline cabe sem quebrar,
+    igual ao comportamento observado nos posts de referência (título sempre ocupa a
+    largura do slide, nunca sobra nem estoura)."""
+    longest = max((len(l) for l in lines), default=1)
+    size = int(area_px / (longest * char_ratio))
+    return max(min_size, min(max_size, size))
 
 
 def _box_stat(items) -> str:
@@ -331,7 +312,7 @@ def build_slides_html(spec: dict) -> list:
     slides_spec = spec["slides"]
 
     renderers = {
-        "capa": lambda s: _slide1_fullbleed(s["headline"], s.get("subtitle", ""), s.get("tag", "IA NA PRÁTICA"), photo_path, proof=s.get("proof"), use_photo=s.get("use_photo", True)),
+        "capa": lambda s: _slide1_fullbleed(s["headline"], s.get("subtitle", ""), s.get("tag", "IA NA PRÁTICA")),
         "capa2": lambda s: _slide_capa2(s.get("tag", "O CASO"), s["headline"], s.get("body", ""), s["stat_items"]),
         "dor": lambda s: _slide_dor(s.get("tag", "O PROBLEMA"), s["headline"], s["pain_lines"]),
         "prompt": lambda s: _slide_prompt(s.get("tag", "O PROMPT"), s["headline"], s.get("body", ""), s["prompt"]),
