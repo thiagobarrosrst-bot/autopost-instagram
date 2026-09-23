@@ -206,15 +206,19 @@ def _proof_card_stats(app_label: str, rows) -> str:
     </div>"""
 
 
+PHOTO_BAND_H = 300  # px do slide (de 525) ocupados pela foto no slide 1
+
+
 def _slide1_fullbleed(headline_lines, subtitle, tag_text, photo_path: Path, proof=None) -> str:
-    """Slide 1: foto real em full-bleed + gradiente escuro na base segurando o texto, com um card
-    de prova real (screenshot-like) flutuando sobre a foto. Modelado nos 5 posts virais analisados
-    (castilho.ia, diegoampuero2, diegoalmeida.ia, wendellcarvalho, joaokepler): todos mostram uma
-    prova concreta na tela, nunca só texto+ornamento. Feito pra parar o scroll de verdade."""
+    """Slide 1: foto real ocupa a faixa de cima (sem texto sobreposto — evita cobrir o rosto,
+    qualquer que seja o enquadramento da foto), texto fica na faixa escura sólida de baixo.
+    Modelado nos posts virais analisados (castilho.ia, joaokepler, wendellcarvalho): a foto
+    é a prova, o texto nunca compete com ela pelo mesmo espaço."""
     photo_uri = _img_data_uri(photo_path) if photo_path.exists() else None
     photo_html = (
-        f'<img src="{photo_uri}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;z-index:0;">'
-        if photo_uri else f'<div style="position:absolute;inset:0;background:{DBG};z-index:0;"></div>'
+        f'<img src="{photo_uri}" style="position:absolute;top:0;left:0;width:100%;height:{PHOTO_BAND_H}px;'
+        f'object-fit:cover;object-position:center 15%;z-index:0;">'
+        if photo_uri else f'<div style="position:absolute;top:0;left:0;width:100%;height:{PHOTO_BAND_H}px;background:{DBG};z-index:0;"></div>'
     )
     proof_html = ""
     if proof:
@@ -222,19 +226,21 @@ def _slide1_fullbleed(headline_lines, subtitle, tag_text, photo_path: Path, proo
             card = _proof_card_stats(proof["label"], proof["items"])
         else:
             card = _proof_card_checklist(proof["label"], proof["items"])
-        proof_html = f'<div style="position:absolute;top:296px;left:0;right:0;z-index:2;">{card}</div>'
+        # Sobrepõe a parte de baixo da FOTO (peito/jaqueta, nunca o rosto) — não invade a
+        # faixa de texto abaixo.
+        proof_html = f'<div style="position:absolute;top:{PHOTO_BAND_H - 150}px;left:0;right:0;z-index:2;">{card}</div>'
+
+    text_top = PHOTO_BAND_H + 20
     return f"""<div class="slide" style="width:{W}px;height:{H}px;position:relative;overflow:hidden;background:{DBG};box-sizing:border-box;">
       {photo_html}
-      <div style="position:absolute;inset:0;background:rgba(18,16,13,0.52);z-index:1;"></div>
-      <div style="position:absolute;left:0;right:0;bottom:0;height:170px;background:linear-gradient(180deg,rgba(18,16,13,0) 0%,rgba(18,16,13,0.9) 100%);z-index:1;"></div>
+      <div style="position:absolute;left:0;right:0;top:{PHOTO_BAND_H - 60}px;height:60px;
+        background:linear-gradient(180deg,rgba(18,16,13,0) 0%,rgba(18,16,13,1) 100%);z-index:1;"></div>
       {_slash_mark_light()}
-      <div style="position:absolute;top:64px;left:26px;right:26px;z-index:5;">
-        {_tag(tag_text, light=True)}
-        {_h1(headline_lines[:3], size=38, light=True)}
-        {_div()}
-      </div>
       {proof_html}
-      <div style="position:absolute;left:26px;right:26px;bottom:20px;z-index:5;">
+      <div style="position:absolute;top:{text_top}px;left:26px;right:26px;z-index:5;">
+        {_tag(tag_text, light=True)}
+        {_h1(headline_lines[:2], size=32, light=True)}
+        {_div()}
         {_body(subtitle, light=True)}
       </div>
     </div>"""
