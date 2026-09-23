@@ -1,0 +1,80 @@
+{
+  "slug": "painel-financeiro-claude",
+  "handle": "@thiagorst.ia",
+  "photo": "assets/thiago_perfil.jpg",
+  "caption": "Meu painel financeiro não foi comprado. Foi escrito no Claude.\n\nNão contratei programador nem paguei licença de sistema. Pedi certo, e ele construiu.\n\nComenta \"PAINEL\" que eu te mando o prompt completo no direct 👇\n\n#inteligenciaartificial #ia #claude #gestaofinanceira #automacao #pequenosnegocios",
+  "slides": [
+    {
+      "kind": "capa",
+      "tag": "CONSTRUÍ ISSO",
+      "headline": ["NÃO COMPREI PAINEL.", "PEDI PRO CLAUDE"],
+      "subtitle": "Sem programador. Sem licença de sistema.",
+      "proof": {
+        "type": "stats",
+        "label": "PAINEL FINANCEIRO",
+        "items": [
+          ["Receita do mês", "R$ 42.850"],
+          ["Margem média", "34%"],
+          ["Em atraso", "3 clientes"]
+        ]
+      }
+    },
+    {
+      "kind": "capa2",
+      "tag": "COMO FUNCIONA",
+      "headline": ["VOCÊ NÃO PRECISA", "SABER PROGRAMAR", "PRA TER ISSO"],
+      "body": "Só precisa saber pedir certo. O resto o Claude constrói.",
+      "stat_items": [
+        ["0", "linhas de código que você precisa escrever"],
+        ["1 TARDE", "pra ter a primeira versão rodando"],
+        ["R$0", "além da assinatura que você já paga"]
+      ]
+    },
+    {
+      "kind": "dor",
+      "tag": "O PROBLEMA",
+      "headline": ["VOCÊ PAGA CARO", "POR FERRAMENTA GENÉRICA"],
+      "pain_lines": [
+        "Planilha que só você entende (e trava toda vez que abre)",
+        "Sistema caro que faz 20% do que seu negócio precisa",
+        "Relatório que demora dias pra ficar pronto"
+      ]
+    },
+    {
+      "kind": "prompt",
+      "tag": "PASSO 1 DE 3",
+      "headline": ["O PAINEL", "FINANCEIRO"],
+      "body": "Cole isso no Claude (leve seus dados de vendas):",
+      "prompt": "\"Aja como analista financeiro do meu negócio de [nicho]. Com base nesses dados de vendas [colar planilha/dados], monte um painel simples mostrando receita do mês, margem por produto e clientes em atraso. Destaque os 3 pontos que mais afetam meu lucro.\""
+    },
+    {
+      "kind": "prompt",
+      "tag": "PASSO 2 DE 3",
+      "headline": ["O ASSISTENTE", "DE PEDIDOS"],
+      "body": "Cole isso pra organizar sua operação:",
+      "prompt": "\"Crie uma rotina simples pra eu organizar pedidos/leads em andamento: status, próximo passo e prazo. Me pergunte os dados que faltam antes de montar.\""
+    },
+    {
+      "kind": "prompt",
+      "tag": "PASSO 3 DE 3",
+      "headline": ["O RELATÓRIO", "DE VENDAS"],
+      "body": "Cole isso toda semana:",
+      "prompt": "\"Resuma minhas vendas da semana [colar dados]: o que vendeu mais, o que não saiu, e uma recomendação prática pra semana que vem. Direto ao ponto, sem enrolação.\""
+    },
+    {
+      "kind": "resultado",
+      "tag": "O RESULTADO",
+      "headline": ["O QUE MUDA NA", "PRÁTICA"],
+      "body": "Com os 3 prompts rodando no seu negócio:",
+      "items": [
+        ["⚡", "Decisão em minutos", "Não em dias esperando relatório"],
+        ["✅", "Feito sob medida", "Do seu jeito, não do jeito genérico do sistema"],
+        ["💰", "Sem mensalidade extra", "Só a assinatura que você já paga"]
+      ]
+    },
+    {
+      "kind": "cta",
+      "cta_word": "PAINEL"
+    }
+  ]
+}

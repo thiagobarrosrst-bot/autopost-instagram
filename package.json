@@ -1,0 +1,12 @@
+{
+  "name": "autopost-instagram",
+  "version": "1.0.0",
+  "description": "Publica carrosséis no Instagram (@thiagorst.ia) automaticamente via GitHub Actions + Meta Graph API",
+  "private": true,
+  "scripts": {
+    "post": "node scripts/post_next.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
