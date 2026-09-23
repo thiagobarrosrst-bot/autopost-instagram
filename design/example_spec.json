@@ -6,6 +6,7 @@
   "slides": [
     {
       "kind": "capa",
+      "use_photo": false,
       "tag": "CONSTRUÍ ISSO",
       "headline": ["NÃO COMPREI PAINEL.", "PEDI PRO CLAUDE"],
       "subtitle": "Sem programador. Sem licença de sistema.",

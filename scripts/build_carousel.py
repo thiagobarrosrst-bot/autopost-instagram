@@ -219,11 +219,12 @@ def _proof_card_stats(app_label: str, rows) -> str:
 FACE_CLEAR_Y = 210  # px a partir do topo que consideramos "zona do rosto" — nada entra aqui
 
 
-def _slide1_fullbleed(headline_lines, subtitle, tag_text, photo_path: Path, proof=None) -> str:
+def _slide1_fullbleed(headline_lines, subtitle, tag_text, photo_path: Path, proof=None, use_photo=True) -> str:
     """Slide 1: foto real full-bleed (imersiva, como nos posts virais analisados), com
     gradiente escuro progressivo na base segurando texto+card — nunca sobre o rosto
-    (que fica nos primeiros ~210px), sempre sobre peito/jaqueta pra baixo."""
-    photo_uri = _img_data_uri(photo_path) if photo_path.exists() else None
+    (que fica nos primeiros ~210px), sempre sobre peito/jaqueta pra baixo.
+    use_photo=False: fundo escuro sólido no lugar da foto (mesmo layout de texto/card)."""
+    photo_uri = _img_data_uri(photo_path) if (use_photo and photo_path.exists()) else None
     photo_html = (
         f'<img src="{photo_uri}" style="position:absolute;inset:0;width:100%;height:100%;'
         f'object-fit:cover;object-position:center 15%;z-index:0;">'
@@ -330,7 +331,7 @@ def build_slides_html(spec: dict) -> list:
     slides_spec = spec["slides"]
 
     renderers = {
-        "capa": lambda s: _slide1_fullbleed(s["headline"], s.get("subtitle", ""), s.get("tag", "IA NA PRÁTICA"), photo_path, proof=s.get("proof")),
+        "capa": lambda s: _slide1_fullbleed(s["headline"], s.get("subtitle", ""), s.get("tag", "IA NA PRÁTICA"), photo_path, proof=s.get("proof"), use_photo=s.get("use_photo", True)),
         "capa2": lambda s: _slide_capa2(s.get("tag", "O CASO"), s["headline"], s.get("body", ""), s["stat_items"]),
         "dor": lambda s: _slide_dor(s.get("tag", "O PROBLEMA"), s["headline"], s["pain_lines"]),
         "prompt": lambda s: _slide_prompt(s.get("tag", "O PROMPT"), s["headline"], s.get("body", ""), s["prompt"]),

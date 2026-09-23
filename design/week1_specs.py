@@ -33,7 +33,7 @@ SPECS = [
             "#inteligenciaartificial #atendimentoaocliente #automacao #chatgpt #pequenosnegocios"
         ),
         "slides": [
-            {"kind": "capa", "tag": "CASE PRÓPRIO",
+            {"kind": "capa", "use_photo": False, "tag": "CASE PRÓPRIO",
              "headline": ["VOCÊ DEMORA 20 MIN", "PRA RESPONDER.", "O CLIENTE SOME"],
              "subtitle": "3 prompts prontos resolvem isso hoje.",
              "proof": {"type": "checklist", "label": "WHATSAPP BUSINESS", "items": [
@@ -78,7 +78,7 @@ SPECS = [
             "#inteligenciaartificial #vendas #propostacomercial #ia #automacao"
         ),
         "slides": [
-            {"kind": "capa", "tag": "CASE PRÓPRIO",
+            {"kind": "capa", "use_photo": False, "tag": "CASE PRÓPRIO",
              "headline": ["MINHA PROPOSTA", "LEVAVA 40 MIN.", "AGORA LEVA 4"],
              "subtitle": "O prompt que fecha o texto pra mim.",
              "proof": {"type": "stats", "label": "PROPOSTA COMERCIAL", "items": [
@@ -121,7 +121,7 @@ SPECS = [
             "#inteligenciaartificial #reducaodecustos #negociacao #ia #gestao"
         ),
         "slides": [
-            {"kind": "capa", "tag": "CASE PRÓPRIO",
+            {"kind": "capa", "use_photo": False, "tag": "CASE PRÓPRIO",
              "headline": ["CONSEGUI 12%", "DE DESCONTO COM", "UMA MENSAGEM"],
              "subtitle": "A IA escreveu, eu só mandei.",
              "proof": {"type": "stats", "label": "NEGOCIAÇÃO FORNECEDOR", "items": [
@@ -164,7 +164,7 @@ SPECS = [
             "#inteligenciaartificial #fluxodecaixa #gestaofinanceira #ia #pequenosnegocios"
         ),
         "slides": [
-            {"kind": "capa", "tag": "CASE PRÓPRIO",
+            {"kind": "capa", "use_photo": False, "tag": "CASE PRÓPRIO",
              "headline": ["ACHEI 3 CLIENTES", "QUE IAM ME DEIXAR", "NO VERMELHO"],
              "subtitle": "Antes de acontecer, não depois.",
              "proof": {"type": "stats", "label": "ALERTA DE CAIXA", "items": [
@@ -207,7 +207,7 @@ SPECS = [
             "#inteligenciaartificial #reducaodecustos #contratos #ia #pequenosnegocios"
         ),
         "slides": [
-            {"kind": "capa", "tag": "CASE PRÓPRIO",
+            {"kind": "capa", "use_photo": False, "tag": "CASE PRÓPRIO",
              "headline": ["POUPEI UMA CONSULTA", "COM ADVOGADO", "USANDO ISSO"],
              "subtitle": "Rascunho pronto, revisão rápida, assina depois.",
              "proof": {"type": "checklist", "label": "CONTRATO DE SERVIÇO", "items": [
@@ -250,7 +250,7 @@ SPECS = [
             "#inteligenciaartificial #automacao #vendas #gestao #ia"
         ),
         "slides": [
-            {"kind": "capa", "tag": "CASE PRÓPRIO",
+            {"kind": "capa", "use_photo": False, "tag": "CASE PRÓPRIO",
              "headline": ["MEU RELATÓRIO", "LEVAVA 1H.", "AGORA LEVA 5 MIN"],
              "subtitle": "Toda semana, sem esforço.",
              "proof": {"type": "stats", "label": "RELATÓRIO SEMANAL", "items": [
@@ -293,7 +293,7 @@ SPECS = [
             "#inteligenciaartificial #automacao #atendimento #ia #pequenosnegocios"
         ),
         "slides": [
-            {"kind": "capa", "tag": "CASE PRÓPRIO",
+            {"kind": "capa", "use_photo": False, "tag": "CASE PRÓPRIO",
              "headline": ["PAREI DE RESPONDER", "A MESMA DÚVIDA", "15X POR SEMANA"],
              "subtitle": "Um FAQ resolveu o que eu repetia toda hora.",
              "proof": {"type": "checklist", "label": "FAQ DO PRODUTO", "items": [
