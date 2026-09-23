@@ -99,6 +99,16 @@ def _tag(t: str, light=False) -> str:
             f'letter-spacing:2.5px;color:{color};text-transform:uppercase;margin-bottom:10px;">{t}</div>')
 
 
+def _tag_pill(t: str) -> str:
+    """Tag em pílula sólida (fundo laranja preenchido, texto branco) — modelada no post
+    viral do @joelsonmadeira_ ('ANÁLISE DE GRINGO'). Usada sobre foto no slide 1, onde
+    texto colorido sozinho (sem fundo) some contra fundos variados da foto."""
+    return (f'<div style="display:inline-block;background:{BP};color:#fff;'
+            f'font-family:\'Space Grotesk\',sans-serif;font-size:10px;font-weight:700;'
+            f'letter-spacing:2px;text-transform:uppercase;padding:5px 12px;border-radius:20px;'
+            f'margin-bottom:12px;">{t}</div>')
+
+
 def _h1(lines, size=44, light=False) -> str:
     r = f'<div style="font-family:\'Bebas Neue\',Impact,sans-serif;font-size:{size}px;font-weight:400;line-height:0.96;">'
     for i, t in enumerate(lines):
@@ -234,7 +244,7 @@ def _slide1_fullbleed(headline_lines, subtitle, tag_text, photo_path: Path, proo
       {_slash_mark_light()}
       {proof_html}
       <div style="position:absolute;left:26px;right:26px;bottom:20px;z-index:5;">
-        {_tag(tag_text, light=True)}
+        {_tag_pill(tag_text)}
         {_h1(headline_lines[:2], size=32, light=True)}
         {_div()}
         {_body(subtitle, light=True)}
