@@ -1,23 +1,6 @@
 {
   "carrosseis": [
     {
-      "id": 1,
-      "titulo": "Meu painel financeiro não foi comprado. Foi escrito no Claude.",
-      "images": [
-        "images/painel-financeiro-claude/slide_1.png",
-        "images/painel-financeiro-claude/slide_2.png",
-        "images/painel-financeiro-claude/slide_3.png",
-        "images/painel-financeiro-claude/slide_4.png",
-        "images/painel-financeiro-claude/slide_5.png",
-        "images/painel-financeiro-claude/slide_6.png",
-        "images/painel-financeiro-claude/slide_7.png",
-        "images/painel-financeiro-claude/slide_8.png"
-      ],
-      "caption": "Meu painel financeiro não foi comprado. Foi escrito no Claude.\n\nNão contratei programador nem paguei licença de sistema. Pedi certo, e ele construiu.\n\nComenta \"PAINEL\" que eu te mando o prompt completo no direct 👇\n\n#inteligenciaartificial #ia #claude #gestaofinanceira #automacao #pequenosnegocios",
-      "postado": true,
-      "postadoEm": "2026-09-23T12:20:45.666Z"
-    },
-    {
       "titulo": "VOCÊ DEMORA 20 MIN PRA RESPONDER. O CLIENTE SOME",
       "images": [
         "images/prompt-atendimento-whatsapp/slide_1.png",
