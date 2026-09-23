@@ -15,6 +15,7 @@ import os
 import sys
 import time
 from pathlib import Path
+from uuid import uuid4
 
 import requests
 from dotenv import load_dotenv
@@ -39,7 +40,10 @@ def get_public_url(image_path: str) -> str:
     if GITHUB_RAW_BASE:
         try:
             rel = Path(image_path).resolve().relative_to(ROOT)
-            return f"{GITHUB_RAW_BASE}/{rel.as_posix()}"
+            # Cache-buster: a Meta guarda em cache uma tentativa de download
+            # falha pra uma URL exata (ex: repo estava privado na 1a tentativa)
+            # e continua rejeitando essa mesma URL depois, mesmo já pública.
+            return f"{GITHUB_RAW_BASE}/{rel.as_posix()}?v={uuid4().hex[:8]}"
         except ValueError:
             pass  # imagem fora do repo — cai pro upload
 
