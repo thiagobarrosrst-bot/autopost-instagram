@@ -188,37 +188,36 @@ def _proof_card_stats(app_label: str, rows) -> str:
     Usar quando a prova é um painel/número (financeiro, métrica), não uma lista de tarefas
     (pra isso, ver _proof_card_checklist)."""
     body_rows = "".join(
-        f'<div style="display:flex;justify-content:space-between;align-items:baseline;padding:7px 0;'
+        f'<div style="display:flex;justify-content:space-between;align-items:baseline;padding:4px 0;'
         f'{"border-bottom:1px solid " + LBR + ";" if i < len(rows) - 1 else ""}">'
-        f'<span style="font-family:\'Space Grotesk\',sans-serif;font-size:12px;color:{MUT};font-weight:500;">{label}</span>'
-        f'<span style="font-family:\'Bebas Neue\',Impact,sans-serif;font-size:20px;color:{INK};">{value}</span></div>'
+        f'<span style="font-family:\'Space Grotesk\',sans-serif;font-size:11.5px;color:{MUT};font-weight:500;">{label}</span>'
+        f'<span style="font-family:\'Bebas Neue\',Impact,sans-serif;font-size:18px;color:{INK};">{value}</span></div>'
         for i, (label, value) in enumerate(rows)
     )
     return f"""<div style="position:absolute;left:24px;right:24px;background:#fff;border-radius:12px;
-      padding:12px 14px;box-shadow:0 12px 30px rgba(0,0,0,0.35);z-index:3;">
-      <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;padding-bottom:8px;
+      padding:10px 14px;box-shadow:0 12px 30px rgba(0,0,0,0.35);z-index:3;">
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;padding-bottom:5px;
         border-bottom:1px solid {LBR};">
         <div style="width:8px;height:8px;border-radius:50%;background:{BP};"></div>
-        <span style="font-family:\'Space Grotesk\',sans-serif;font-size:11px;font-weight:700;
+        <span style="font-family:\'Space Grotesk\',sans-serif;font-size:10.5px;font-weight:700;
           letter-spacing:0.5px;color:{INK};">{app_label}</span>
       </div>
       {body_rows}
     </div>"""
 
 
-PHOTO_BAND_H = 300  # px do slide (de 525) ocupados pela foto no slide 1
+FACE_CLEAR_Y = 210  # px a partir do topo que consideramos "zona do rosto" — nada entra aqui
 
 
 def _slide1_fullbleed(headline_lines, subtitle, tag_text, photo_path: Path, proof=None) -> str:
-    """Slide 1: foto real ocupa a faixa de cima (sem texto sobreposto — evita cobrir o rosto,
-    qualquer que seja o enquadramento da foto), texto fica na faixa escura sólida de baixo.
-    Modelado nos posts virais analisados (castilho.ia, joaokepler, wendellcarvalho): a foto
-    é a prova, o texto nunca compete com ela pelo mesmo espaço."""
+    """Slide 1: foto real full-bleed (imersiva, como nos posts virais analisados), com
+    gradiente escuro progressivo na base segurando texto+card — nunca sobre o rosto
+    (que fica nos primeiros ~210px), sempre sobre peito/jaqueta pra baixo."""
     photo_uri = _img_data_uri(photo_path) if photo_path.exists() else None
     photo_html = (
-        f'<img src="{photo_uri}" style="position:absolute;top:0;left:0;width:100%;height:{PHOTO_BAND_H}px;'
+        f'<img src="{photo_uri}" style="position:absolute;inset:0;width:100%;height:100%;'
         f'object-fit:cover;object-position:center 15%;z-index:0;">'
-        if photo_uri else f'<div style="position:absolute;top:0;left:0;width:100%;height:{PHOTO_BAND_H}px;background:{DBG};z-index:0;"></div>'
+        if photo_uri else f'<div style="position:absolute;inset:0;background:{DBG};z-index:0;"></div>'
     )
     proof_html = ""
     if proof:
@@ -226,18 +225,15 @@ def _slide1_fullbleed(headline_lines, subtitle, tag_text, photo_path: Path, proo
             card = _proof_card_stats(proof["label"], proof["items"])
         else:
             card = _proof_card_checklist(proof["label"], proof["items"])
-        # Sobrepõe a parte de baixo da FOTO (peito/jaqueta, nunca o rosto) — não invade a
-        # faixa de texto abaixo.
-        proof_html = f'<div style="position:absolute;top:{PHOTO_BAND_H - 150}px;left:0;right:0;z-index:2;">{card}</div>'
+        proof_html = f'<div style="position:absolute;top:{FACE_CLEAR_Y}px;left:0;right:0;z-index:2;">{card}</div>'
 
-    text_top = PHOTO_BAND_H + 20
     return f"""<div class="slide" style="width:{W}px;height:{H}px;position:relative;overflow:hidden;background:{DBG};box-sizing:border-box;">
       {photo_html}
-      <div style="position:absolute;left:0;right:0;top:{PHOTO_BAND_H - 60}px;height:60px;
-        background:linear-gradient(180deg,rgba(18,16,13,0) 0%,rgba(18,16,13,1) 100%);z-index:1;"></div>
+      <div style="position:absolute;left:0;right:0;top:{FACE_CLEAR_Y}px;bottom:0;
+        background:linear-gradient(180deg,rgba(18,16,13,0) 0%,rgba(18,16,13,0.55) 30%,rgba(18,16,13,0.97) 65%);z-index:1;"></div>
       {_slash_mark_light()}
       {proof_html}
-      <div style="position:absolute;top:{text_top}px;left:26px;right:26px;z-index:5;">
+      <div style="position:absolute;left:26px;right:26px;bottom:20px;z-index:5;">
         {_tag(tag_text, light=True)}
         {_h1(headline_lines[:2], size=32, light=True)}
         {_div()}
