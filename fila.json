@@ -115,8 +115,9 @@
         "images/prompt-faq-automatico/slide_8.png"
       ],
       "caption": "Parei de responder a mesma dúvida sobre o produto 15 vezes por semana.\n\nO prompt que transforma suas perguntas mais frequentes num FAQ pronto pra colar no seu site ou bio.\n\nComenta \"FAQ\" que eu te mando o prompt completo no direct 👇\n\n#inteligenciaartificial #automacao #atendimento #ia #pequenosnegocios",
-      "postado": false,
-      "id": 8
+      "postado": true,
+      "id": 8,
+      "postadoEm": "2026-09-30T11:16:29.305Z"
     }
   ]
 }
